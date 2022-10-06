@@ -33,11 +33,14 @@ router
     res.send(news);
   })
   .post((req, res) => {
-    let biggest = news.reduce((prev, current) =>
-      prev.id > current.id ? prev : current
-    );
+    let biggest;
+    if (news.length !== 0) {
+      biggest = news.reduce((prev, current) =>
+        prev.id > current.id ? prev : current
+      );
+    }
     news.push({
-      id: biggest.id + 1,
+      id: biggest ? biggest.id + 1 : 1,
       title: req.body.title,
       text: req.body.text,
     });
@@ -57,7 +60,16 @@ router
       let i = news.indexOf(obj);
       news.splice(i, 1);
     }
-    res.send(news);
+    res.redirect("/");
+  })
+  .put((req, res) => {
+    let obj = news.find((el) => el.id === parseInt(req.params.id));
+    if (obj) {
+      const { title, text } = req.body;
+      obj.title = title;
+      obj.text = text;
+    }
+    res.redirect("/");
   });
 
 /*
