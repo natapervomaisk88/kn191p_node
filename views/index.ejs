@@ -19,5 +19,18 @@
         <button type="submit">Add</button>
       </form>
     </div>
+    <div>
+      <ul>
+        <% news.forEach(item => { %>
+        <li>
+          <a href="/news/<%= item.id%>"><%= item.title%></a>
+          <form action="/news/<%= item.id%>" method="POST">
+            <input type="hidden" name="_method" value="DELETE" />
+            <button type="submit">del</button>
+          </form>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
   </body>
 </html>
