@@ -2,9 +2,11 @@ import express from "express"; //подключили пакет с фреймв
 import path from "path";
 import bodyParser from "body-parser";
 import router from "./routers/routers.js";
+import ejsMate from "ejs-mate";
 const __dirname = path.resolve();
 const PORT = process.env.PORT ?? 3000; //определили port
 const app = express();
+app.engine("ejs", ejsMate);
 app.set("views", path.resolve(__dirname, "views"));
 app.set("view engine", "ejs");
 app.use(bodyParser.json());

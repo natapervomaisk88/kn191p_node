@@ -1,5 +1,4 @@
-<%- include('./partials/head') -%>
-<h1>Express GET REQUEST</h1>
+<% layout('layouts/main') -%>
 <div>
   <form action="/news" method="post">
     <label for="">Title news</label>
@@ -34,4 +33,3 @@
     <% }) %>
   </ul>
 </div>
-<%- include('./partials/foot') -%>
