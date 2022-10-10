@@ -30,7 +30,7 @@ router
 router
   .route("/news")
   .get((req, res) => {
-    res.send(news);
+    res.render("news.ejs");
   })
   .post((req, res) => {
     let biggest;
