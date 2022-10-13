@@ -1,9 +1,8 @@
 import Router from "express";
 import path from "path";
 import news from "../models/news.js";
-import users from "../models/users.js";
 import methodOverride from "method-override";
-import { userInfo } from "os";
+import { add_user } from "../controllers/user.controller.js";
 const __dirname = path.resolve();
 const router = Router();
 router.use(methodOverride("X-HTTP-Method")); //          Microsoft
@@ -30,7 +29,7 @@ router
     res.render("index.ejs", {
       title: "My Express (ejs)",
       news: news,
-      username: req.cookies.username,
+      username: req.signedCookies.username,
     });
   })
   .post((req, res) => {
@@ -87,39 +86,20 @@ router
   .get((req, res) => {
     res.render("register", {
       title: "Регистрация",
-      username: req.cookies.username,
+      username: req.signedCookies.username,
     });
   })
-  .post((req, res) => {
-    if (req.body) {
-      const { name, surname, login, email, password, repeat_password } =
-        req.body;
-      if (password === repeat_password) {
-        //валидация данных
-        let biggest;
-        if (users.length !== 0) {
-          biggest = users.reduce((prev, current) =>
-            prev.id > current.id ? prev : current
-          );
-        }
-        users.push({
-          id: biggest ? biggest.id + 1 : 1,
-          name: name,
-          surname: surname,
-          login: login,
-          email: email,
-          password: password,
-        });
-        res.cookie("username", name);
-        console.log(name);
-        res.redirect("/");
-      }
-    }
+  .post(add_user, (req, res) => {
+    res.redirect("/");
   });
 
 router.route("/logout").get((req, res) => {
-  if (req.cookies.username) res.clearCookie("username");
-  req.redirect("/");
+  if (req.signedCookies.username) res.clearCookie("username");
+  res.render("index", {
+    title: "Index",
+    news: news,
+    username: req.signedCookies.username,
+  });
 });
 /*
   /news GET - получить все новости
