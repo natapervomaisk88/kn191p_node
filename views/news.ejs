@@ -1,4 +1,4 @@
-<%- include('./partials/head.ejs') -%>
+<% layout('layouts/main', {username: username}) -%>
 <div id="wrapper">
   <!-- Navigation -->
   <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -429,5 +429,3 @@
   <!-- /#page-wrapper -->
 </div>
 <!-- /#wrapper -->
-
-<%- include('./partials/foot.ejs') -%>

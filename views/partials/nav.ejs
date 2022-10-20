@@ -1,6 +1,7 @@
 <% const pages = [ {url: '/', title: 'Home', icon: 'fa fa-fw fa-bar-chart-o'},
-{url: '/news', title: 'News', icon: 'fa fa-fw fa-dashboard'}, {url: '/register',
-title: 'Registration', icon: 'fa fa-fw fa-table'} ] %>
+{url: '/news', title: 'News', icon: 'fa fa-fw fa-dashboard'}, {url:
+'/register',title: 'Registration', icon: 'fa fa-fw fa-table'}, {url: '/login',
+title:'Login', icon: 'fa fa-fw fa-table'} ] %>
 <div class="collapse navbar-collapse navbar-ex1-collapse">
   <ul class="nav navbar-nav side-nav">
     <% pages.forEach((page) => { %>
@@ -10,7 +11,8 @@ title: 'Registration', icon: 'fa fa-fw fa-table'} ] %>
       >
     </li>
     <% }) %>
-    <li class="active">
+    <li>
+      <!-- <li class="active"> -->
       <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
     </li>
     <li>

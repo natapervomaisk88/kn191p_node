@@ -1,5 +1,7 @@
 import users from "../models/users.js";
-export const add_user = (req, res, next) => {
+import bcrypt from "bcryptjs";
+
+export const add_user = async (req, res, next) => {
   if (req.body) {
     const { name, surname, login, email, password, repeat_password } = req.body;
     if (password === repeat_password) {
@@ -10,18 +12,24 @@ export const add_user = (req, res, next) => {
           prev.id > current.id ? prev : current
         );
       }
+
+      const salt = await bcrypt.genSalt(10);
+      console.log(`salt: ${salt}}`);
+      const hash = await bcrypt.hashSync(password, salt);
+      console.log(`hash: ${hash}`);
+      console.log(`salt: ${salt}`);
       users.push({
         id: biggest ? biggest.id + 1 : 1,
         name: name,
         surname: surname,
         login: login,
         email: email,
-        password: password,
+        salt: salt,
+        password: hash,
       });
 
-      console.log(name);
       res.cookie("username", name, {
-        maxAge: 60 * 1000, // 1 минута
+        maxAge: 3600 * 24, // 1 сутки
         signed: true,
       });
     }

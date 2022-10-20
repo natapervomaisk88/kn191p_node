@@ -4,8 +4,18 @@ const users = [
     name: "Nicole",
     surname: "Petrov",
     login: "nicole",
-    password: "123",
+    salt: "$2a$10$5PPJsHntX70eAr4EWVPzNO}",
+    password: "$2a$10$5PPJsHntX70eAr4EWVPzNOCvShFU6e6CPYa7lZNazKfk4KQGXD.Jy",
     email: "nicole@gmail.com",
+  },
+  {
+    id: 15,
+    name: "John",
+    surname: "Smith",
+    login: "john",
+    salt: "$2a$10$5PPJsHntX70eAr4EWVPzNO}",
+    password: "$2a$10$5PPJsHntX70eAr4EWVPzNOCvShFU6e6CPYa7lZNazKfk4KQGXD.Jy",
+    email: "john@gmail.com",
   },
 ];
 export default users;

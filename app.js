@@ -4,11 +4,19 @@ import bodyParser from "body-parser";
 import router from "./routes/routes.js";
 import ejsMate from "ejs-mate";
 import cookieParser from "cookie-parser";
+import session from "express-session";
 import { config } from "./config/config.js";
 const __dirname = path.resolve();
 const PORT = process.env.PORT ?? 3000; //определили port
 const app = express();
 app.use(cookieParser(config.secret_key));
+app.use(
+  session({
+    secret: config.secret_key,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 app.engine("ejs", ejsMate);
 app.set("views", path.resolve(__dirname, "views"));
 app.set("view engine", "ejs");
